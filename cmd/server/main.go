@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/jerryan999/book-service/internal/server"
+	internal "github.com/jerryan999/book-service/internal"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -30,8 +30,8 @@ func main() {
 	db := client.Database("testing")
 
 	// create a new mongo repository
-	var repository server.BookRepository = server.NewMongoBookRepository(db)
-	srv := server.NewRPCServer(repository)
+	var repository internal.BookRepository = internal.NewMongoBookRepository(db)
+	srv := internal.NewRPCServer(repository)
 
 	if err := srv.Serve(listen); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
