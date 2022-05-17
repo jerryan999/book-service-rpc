@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package api.v1;
+
+import "google/protobuf/timestamp.proto";
+option go_package = "github.com/jerryan999/book-service/api/v1";
+
+
+service BookService {
+    rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {};
+    rpc RetrieveBook(RetrieveBookRequest) returns (RetrieveBookResponse) {};
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {};
+    rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse) {};
+    rpc ListBook(ListBookRequest) returns (ListBookResponse) {};
+}
+
+message Book {
+    int64 bid = 1;
+    string title = 2;
+    string author = 3;
+    string description = 4;
+    string language = 8;
+    google.protobuf.Timestamp finish_time = 9;
+}
+
+message CreateBookRequest {
+    Book book = 1;
+}
+
+message CreateBookResponse {
+    int64 bid = 1; 
+}
+
+message RetrieveBookRequest {
+    int64 bid = 1;
+}
+
+message RetrieveBookResponse {
+    Book book = 1;
+}
+
+message UpdateBookRequest {
+    Book book = 1;
+}
+
+message UpdateBookResponse {
+}
+
+message DeleteBookRequest {
+    int64 bid = 1;
+}
+
+message DeleteBookResponse {
+}
+
+message ListBookRequest {
+    int64 offset = 1;
+    int64 limit = 2;
+}
+message ListBookResponse {
+    repeated Book books = 1;
+}
